@@ -82,6 +82,7 @@ bool box::Intersect(Ray& r)
                 return false;
         }
     }
+    r.t = t_near;
     return (t_near <= t_far && t_far >= 0);
 
  }

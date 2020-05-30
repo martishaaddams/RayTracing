@@ -118,19 +118,23 @@ int scan(const std::string& inp1, const std::string& inp2)
 					{
 						arr[]
 					}*/
+					//int m = width-i;
+					//int m1 = height - j;
 #pragma omp parallel for
 					for (int k = 0; k < n; k++)
 					{
-						if (arr[k]->Intersect(raybuff[i + j * width])/*&&raybuff[i+j*width].t<tmin*/)//here is no check if it is closest? so it is half write
+						if (arr[k]->Intersect(raybuff[i + j * width])&&raybuff[i+j*width].t<tmin)//here is no check if it is closest? so it is half write
 						{
 							raybuff[i + j * width].color = arr[k]->color;
-							img.setPixel(i, j, arr[k]->color);
+							img.setPixel(i,j , arr[k]->color);
 							tmin = raybuff[i + j * width].t;
 						}
 					}
 				}
 
 			}
+			//img.flipHorizontally();
+			//img.flipVertically();
 			if (!img.saveToFile("result.bmp"))
 			{
 				std::cout << "Failed to save";

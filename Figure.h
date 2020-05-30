@@ -6,9 +6,9 @@
 class Figure
 {
 public:
-	Figure();
+	//virtual Figure()=0;
 	virtual bool Intersect(Ray &r)=0;
-	~Figure();
+	//virtual~Figure()=0;
 };
 
 #endif

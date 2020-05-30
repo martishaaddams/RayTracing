@@ -1,15 +1,20 @@
 // RayTracing.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-/*#include <iostream>
+#include <iostream>
 #include"box.h"
 #include"Ray.h"
 #include "Figure.h"
-//#include <SFML/Graphics.hpp>
+#include <SFML/Graphics.hpp>
+#include"Header.h"
+#include"Factorybox.h"
 using namespace std;
+void render(const int width, const int height);
+int scan(const std::string& inp1, const std::string& inp2);
 int main()
 {
-    std::array<int, 3> a;
+    std::cout << "begin" << std::endl;
+    /*std::array<int, 3> a;
 
     a[0] = 1;
     a[1] = 2;
@@ -21,10 +26,13 @@ int main()
     b[2] = 6;
     Ray ray(a, b);
     ray.out();
+    render(100,300);*/
+    scan("databox.txt","data.txt");
     return 0;
-}*/
+}
 
-#include <iostream>
+/*#include <iostream>
+#include<stdio.h>
 #include <fstream>
 #include <sstream>
 
@@ -44,9 +52,10 @@ int main()
     /*** NOTICE!! You have to use uint8_t array to pass in stb function  ***/
     // Because the size of color is normally 255, 8bit.
     // If you don't use this one, you will get a weird imge.
-    uint8_t* pixels = new uint8_t[width * height * CHANNEL_NUM];
+    /*uint8_t* pixels = new uint8_t[width * height * CHANNEL_NUM];
 
     int index = 0;
+#pragma omp parallel for
     for (int j = height - 1; j >= 0; --j)
     {
         for (int i = 0; i < width; ++i)
@@ -69,10 +78,11 @@ int main()
 
     // You have to use 3 comp for complete jpg file. If not, the image will be grayscale or nothing.
     stbi_write_jpg("stbjpg3.jpg", width, height, 3, pixels, 100);
+    stbi_write_bmp("stbmp.bmp", width, height, CHANNEL_NUM, pixels);
     delete[] pixels;
 
     return 0;
-}
+}*/
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu

@@ -10,12 +10,12 @@ Ray::Ray()
 		dot[i] = 0;
 	}
 }
-Ray::Ray(std::array<int, 3> a, std::array<int, 3> b)
+Ray::Ray(std::array<float, 3> a, std::array<float, 3> b)
 {
 	direction = a;
 	dot = b;
 }
-Ray::Ray(std::array<int,6> a)
+Ray::Ray(std::array<float,6> a)
 {
 	if (a.size() != 6)
 	{

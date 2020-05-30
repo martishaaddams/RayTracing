@@ -1,4 +1,5 @@
 #include "box.h"
+#include<limits>
 void swap(float &a, float &b)//maybe it doesnt works
 {
     float t = a;
@@ -6,8 +7,16 @@ void swap(float &a, float &b)//maybe it doesnt works
     b = t;
 
 }
+box::box()
+{
+    for (int i = 0; i < 3; i++)
+    {
+        min_point[i] = 0;
+        max_point[i] = 0;
+    }
+}
 //tmin = (t0x > t0y) ? t0x : t0y
-bool box::Intersect(Ray& r)
+/*bool box::Intersect(Ray& r)
 {
     
     
@@ -46,4 +55,33 @@ bool box::Intersect(Ray& r)
      r.t = tmin;//Check if it is right
         return true;
     
-}
+}*/
+bool box::Intersect(Ray& r)
+{
+    float t_near = std::numeric_limits<float>::min();
+    float t_far=std::numeric_limits<float>::max();
+    float t1, t2;
+    for (int i = 0; i < 3; i++)
+    {
+        if (abs(r.direction[i]) >= std::numeric_limits<float>::epsilon()) {
+            t1 = (this->min_point[i] - r.dot[i]) / r.direction[i];
+            t2 = (this->max_point[i] - r.dot[i]) / r.direction[i];
+            if (t1 > t2)
+                std::swap(t1, t2);
+            if (t1 > t_near)
+                t_near = t1;
+            if (t2 < t_far)
+                t_far = t2;
+            if (t_near > t_far)
+                return false;
+            if (t_far < 0.0)
+                return false;
+        }
+        else {
+            if (r.dot[i] < this->min_point[i] || r.dot[i] > this->max_point[i])
+                return false;
+        }
+    }
+    return (t_near <= t_far && t_far >= 0);
+
+ }
